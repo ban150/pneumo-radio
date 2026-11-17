@@ -1,0 +1,19 @@
+{
+  "version": "principal_v3",
+  "seuil_validation": 0.1805,
+  "taille": 224,
+  "percentiles": [
+    0.5,
+    99.5
+  ],
+  "moyenne": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "ecart_type": [
+    0.229,
+    0.224,
+    0.225
+  ]
+}

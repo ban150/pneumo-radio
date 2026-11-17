@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pneumo Radio</title>
+<meta name="theme-color" content="#0f5c6e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone.svg">
+<style>
+  :root { --fond:#f4f7f8; --carte:#fff; --texte:#1b2a30; --doux:#5b6b72; --accent:#0f5c6e; --alerte:#b3261e; --ok:#1e7a3c; --bord:#d8e1e4; }
+  @media (prefers-color-scheme: dark) { :root { --fond:#10181b; --carte:#182327; --texte:#e6eef0; --doux:#9fb0b6; --accent:#5fb3c6; --alerte:#ff8a80; --ok:#7fd99a; --bord:#2a3a40; } }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--fond); color:var(--texte); }
+  main { max-width:560px; margin:0 auto; padding:16px; }
+  h1 { font-size:1.4rem; margin:8px 0 4px; }
+  .sous { color:var(--doux); margin:0 0 16px; font-size:.95rem; }
+  .carte { background:var(--carte); border:1px solid var(--bord); border-radius:12px; padding:16px; margin-bottom:16px; }
+  .boutons { display:flex; gap:8px; flex-wrap:wrap; }
+  label.btn { flex:1 1 200px; text-align:center; background:var(--accent); color:#fff; padding:14px; border-radius:10px; font-weight:600; cursor:pointer; }
+  label.btn.sec { background:transparent; color:var(--accent); border:2px solid var(--accent); }
+  input[type=file] { display:none; }
+  canvas { width:100%; max-width:320px; aspect-ratio:1; display:block; margin:0 auto 12px; border-radius:8px; background:#000; }
+  .score { font-size:2.4rem; font-weight:700; text-align:center; margin:4px 0; }
+  .verdict { text-align:center; font-weight:600; font-size:1.1rem; }
+  .pos { color:var(--alerte); } .neg { color:var(--ok); }
+  .petit { color:var(--doux); font-size:.85rem; line-height:1.4; }
+  .avert { border-left:4px solid var(--alerte); }
+  #etat { text-align:center; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Pneumo Radio</h1>
+  <p class="sous">Aide à la lecture de radiographies thoraciques. Fonctionne sans connexion.</p>
+
+  <div class="carte avert petit">
+    <strong>Prototype de recherche (mémoire de Master), pas un dispositif médical.</strong>
+    Le résultat ne remplace jamais l'avis d'un médecin. Sur des radiographies africaines, l'AUC du modèle n'est que de 0,73 environ.
+  </div>
+
+  <div class="carte">
+    <div class="boutons">
+      <label class="btn">Choisir une radiographie<input id="fichier" type="file" accept="image/*"></label>
+      <label class="btn sec">Photographier un film<input id="photo" type="file" accept="image/*" capture="environment"></label>
+    </div>
+    <p class="petit">La photo d'un film est expérimentale : le modèle a été entraîné sur des images numériques, une photo peut dégrader le résultat.</p>
+  </div>
+
+  <div class="carte" id="resultat" hidden>
+    <canvas id="apercu" width="224" height="224"></canvas>
+    <div class="score" id="score"></div>
+    <div class="verdict" id="verdict"></div>
+    <p class="petit" id="details"></p>
+  </div>
+
+  <p class="petit" id="etat">Chargement du modèle…</p>
+</main>
+<script src="vendor/ort.wasm.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

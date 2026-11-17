@@ -1,0 +1,11 @@
+{
+  "name": "Pneumo Radio",
+  "short_name": "PneumoRadio",
+  "description": "Prototype hors ligne d'aide à la lecture de radiographies thoraciques (mémoire de Master).",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f7f8",
+  "theme_color": "#0f5c6e",
+  "lang": "fr",
+  "icons": [{ "src": "icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
